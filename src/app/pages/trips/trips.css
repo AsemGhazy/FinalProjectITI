@@ -1,0 +1,45 @@
+.wanderly-trips {
+    min-height: 100vh;
+    background: var(--bg-main);
+    color: var(--text-body);
+}
+
+.wanderly-trips .navbar-brand i {
+    vertical-align: -2px;
+}
+
+.wanderly-trips .navbar-brand small {
+    color: var(--text-muted);
+}
+
+.wanderly-trips .navbar-toggler:focus {
+    box-shadow: 0 0 0 3px rgba(26, 111, 224, .12);
+}
+
+.wanderly-trips .destination-card strong {
+    font-size: .92rem;
+}
+
+.wanderly-trips .card-body-info {
+    padding: 14px;
+    border-top: 1px solid var(--border-main);
+}
+
+@media (max-width: 575px) {
+    .wanderly-trips .hero-eyebrow {
+        font-size: .62rem;
+    }
+
+    .wanderly-trips .filter-pill {
+        font-size: .8rem;
+        padding: 6px 13px;
+    }
+
+    .wanderly-trips .newsletter-bar .d-flex {
+        flex-wrap: wrap;
+    }
+
+    .wanderly-trips .newsletter-bar .btn-subscribe {
+        width: 100%;
+    }
+}

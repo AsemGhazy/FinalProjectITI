@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg wanderly-navbar">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/home">
+      <i class="bi bi-airplane-fill"></i> Wanderly
+      <small>TRAVEL THE WORLD</small>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation">
+      <i class="bi bi-list"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/destinations" routerLinkActive="active">Destinations</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/trips" routerLinkActive="active">Trips</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/booking" routerLinkActive="active">Bookings</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/my-bookings" routerLinkActive="active">My Bookings</a></li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3">
+        <div class="help-box d-none d-xl-flex">
+          <i class="bi bi-telephone-fill help-icon"></i>
+          <div>
+            <div class="tiny">Need Help?</div>
+            <strong class="small" style="color: var(--text-heading);">+1234 567 8900</strong>
+          </div>
+        </div>
+        <button
+          class="theme-toggle"
+          type="button"
+          (click)="toggleTheme()"
+          [attr.aria-label]="theme.darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+        >
+          <i class="bi" [class.bi-moon-fill]="!theme.darkMode" [class.bi-sun-fill]="theme.darkMode"></i>
+        </button>
+        <a class="profile-icon" routerLink="/my-wishlist" aria-label="Wishlist"><i class="bi bi-heart"></i></a>
+        <a class="profile-icon" routerLink="/login" aria-label="Profile"><i class="bi bi-person"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>

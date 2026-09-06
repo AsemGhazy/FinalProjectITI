@@ -1,0 +1,108 @@
+<app-navbar></app-navbar>
+
+<div
+  class="page-header page-header-hero"
+  style="background-image: url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1800&q=85');"
+>
+  <div class="page-header-fade"></div>
+  <div class="container page-header-content">
+    <h1 class="section-title mb-1">Book Your Trip</h1>
+    <p class="mb-0" style="color: var(--text-muted)">Choose a trip and fill in your travel details</p>
+  </div>
+</div>
+
+<div class="container section-py pt-0 px-3">
+  <div class="row g-4">
+    <!-- Trip selection -->
+    <div class="col-lg-7">
+      <h5 class="mb-3" style="color: var(--text-heading)">1. Select a Trip</h5>
+      <div class="row g-3 mx-0">
+        <div class="col-sm-6 px-2 px-sm-3" *ngFor="let trip of trips">
+          <div
+            class="destination-card"
+            [class.border-primary]="selectedTripId === trip.id"
+            style="cursor: pointer"
+            (click)="selectTrip(trip.id)"
+          >
+            <div class="img-wrap">
+              <img [src]="trip.image" [alt]="trip.name" />
+            </div>
+            <div class="card-body-info">
+              <h6 class="mb-1" style="color: var(--text-heading)">{{ trip.name }}</h6>
+              <p class="mb-2" style="color: var(--text-muted); font-size: .8rem">
+                <i class="bi bi-geo-alt"></i> {{ trip.location }}
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="rating-stars">
+                  <i class="bi bi-star-fill"></i> {{ trip.rating }}
+                </span>
+                <strong style="color: var(--brand-primary)">${{ trip.price }}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking form -->
+    <div class="col-lg-5">
+      <h5 class="mb-3" style="color: var(--text-heading)">2. Trip Details</h5>
+      <div class="search-widget" style="margin-top: 0">
+        <div *ngIf="!selectedTrip" class="empty-state py-4">
+          <i class="bi bi-airplane"></i>
+          <p class="mt-2 mb-0">Select a trip to continue</p>
+        </div>
+
+        <form *ngIf="selectedTrip" (ngSubmit)="submitBooking()">
+          <div class="mb-3">
+            <label class="form-label" style="font-size: .8rem; color: var(--text-muted)">Travel Date</label>
+            <input
+              type="date"
+              class="form-control form-control-wanderly"
+              [(ngModel)]="travelDate"
+              name="travelDate"
+              [min]="minDate"
+              required
+            />
+          </div>
+
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label class="form-label" style="font-size: .8rem; color: var(--text-muted)">Adults</label>
+              <input
+                type="number"
+                class="form-control form-control-wanderly"
+                [(ngModel)]="adults"
+                name="adults"
+                min="1"
+                required
+              />
+            </div>
+            <div class="col-6">
+              <label class="form-label" style="font-size: .8rem; color: var(--text-muted)">Children</label>
+              <input
+                type="number"
+                class="form-control form-control-wanderly"
+                [(ngModel)]="children"
+                name="children"
+                min="0"
+              />
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3" style="border-color: var(--border-main) !important">
+            <span style="color: var(--text-muted)">Total Price</span>
+            <strong style="color: var(--brand-primary); font-size: 1.3rem">${{ totalPrice }}</strong>
+          </div>
+
+          <div class="alert alert-danger py-2" *ngIf="errorMessage">{{ errorMessage }}</div>
+          <div class="alert alert-success py-2" *ngIf="successMessage">{{ successMessage }}</div>
+
+          <button type="submit" class="btn btn-wanderly w-100">Confirm Booking</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

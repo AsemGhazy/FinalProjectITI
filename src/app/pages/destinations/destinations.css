@@ -1,0 +1,44 @@
+.wanderly-destinations {
+    min-height: 100vh;
+    background: var(--bg-main);
+    color: var(--text-body);
+}
+
+.wanderly-destinations .navbar-brand i {
+    vertical-align: -2px;
+}
+
+.wanderly-destinations .navbar-brand small {
+    color: var(--text-muted);
+}
+
+.wanderly-destinations .navbar-toggler:focus {
+    box-shadow: 0 0 0 3px rgba(26, 111, 224, .12);
+}
+
+.wanderly-destinations .destination-card strong {
+    font-size: .92rem;
+}
+
+.wanderly-destinations .destination-card {
+    cursor: pointer;
+}
+
+@media (max-width: 575px) {
+    .wanderly-destinations .hero-eyebrow {
+        font-size: .62rem;
+    }
+
+    .wanderly-destinations .filter-pill {
+        font-size: .8rem;
+        padding: 6px 13px;
+    }
+
+    .wanderly-destinations .newsletter-bar .d-flex {
+        flex-wrap: wrap;
+    }
+
+    .wanderly-destinations .newsletter-bar .btn-subscribe {
+        width: 100%;
+    }
+}

@@ -1,0 +1,103 @@
+<div class="auth-page">
+  <div class="auth-box">
+    <div class="logo-mark">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M12 3L4 7V11C4 16.1 7.4 20.4 12 21C16.6 20.4 20 16.1 20 11V7L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1 class="auth-title">Create account</h1>
+    <p class="auth-subtitle">Start planning your next trip</p>
+
+    <div class="alert-error" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <div class="alert-success" *ngIf="successMessage">{{ successMessage }}</div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+      <!-- Full name -->
+      <div class="form-field">
+        <label for="fullName">Full name</label>
+        <input
+          id="fullName"
+          type="text"
+          formControlName="fullName"
+          placeholder="Your full name"
+          [class.is-invalid]="fullName?.invalid && fullName?.touched"
+        />
+        <div class="field-error" *ngIf="fullName?.invalid && fullName?.touched">
+          <span *ngIf="fullName?.errors?.['required']">Full name is required</span>
+          <span *ngIf="fullName?.errors?.['minlength']">Must be at least 3 characters</span>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-field">
+        <label for="email">Email address</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="you@example.com"
+          [class.is-invalid]="email?.invalid && email?.touched"
+        />
+        <div class="field-error" *ngIf="email?.invalid && email?.touched">
+          <span *ngIf="email?.errors?.['required']">Email is required</span>
+          <span *ngIf="email?.errors?.['email']">Please enter a valid email</span>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-field">
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+          <input
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="••••••••"
+            [class.is-invalid]="password?.invalid && password?.touched"
+          />
+          <button type="button" class="toggle-password" (click)="togglePassword()">
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+        <div class="field-error" *ngIf="password?.invalid && password?.touched">
+          <span *ngIf="password?.errors?.['required']">Password is required</span>
+          <span *ngIf="password?.errors?.['minlength']">Must be at least 6 characters</span>
+          <span *ngIf="password?.errors?.['pattern']">Must contain at least one letter and one number</span>
+        </div>
+      </div>
+
+      <!-- Confirm password -->
+      <div class="form-field">
+        <label for="confirmPassword">Confirm password</label>
+        <div class="password-wrapper">
+          <input
+            id="confirmPassword"
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            formControlName="confirmPassword"
+            placeholder="••••••••"
+            [class.is-invalid]="confirmPassword?.touched && registerForm.errors?.['passwordMismatch']"
+          />
+          <button type="button" class="toggle-password" (click)="toggleConfirmPassword()">
+            {{ showConfirmPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+        <div class="field-error" *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.touched">
+          Please confirm your password
+        </div>
+        <div class="field-error" *ngIf="registerForm.errors?.['passwordMismatch'] && confirmPassword?.touched && !confirmPassword?.errors?.['required']">
+          Passwords do not match
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Creating account...' : 'Create account' }}
+      </button>
+    </form>
+
+    <p class="auth-footer">
+      Already have an account? <a routerLink="/login">Login</a>
+    </p>
+  </div>
+</div>

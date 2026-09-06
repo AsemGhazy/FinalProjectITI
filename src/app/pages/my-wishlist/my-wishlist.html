@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+
+<div
+  class="page-header page-header-hero"
+  style="background-image: url('https://images.unsplash.com/photo-1500835556837-99ac94a94552?auto=format&fit=crop&w=1800&q=85');"
+>
+  <div class="page-header-fade"></div>
+  <div class="container page-header-content">
+    <h1 class="section-title mb-1">My Wishlist</h1>
+    <p class="mb-0" style="color: var(--text-muted)">Trips you've saved to book later</p>
+  </div>
+</div>
+
+<div class="container section-py pt-0 px-3">
+  <div class="empty-state" *ngIf="items.length === 0">
+    <i class="bi bi-heart"></i>
+    <p class="mt-2 mb-3">You haven't saved any trips yet</p>
+    <a routerLink="/trips" class="btn btn-wanderly">Browse Trips</a>
+  </div>
+
+  <div class="row g-4 mx-0" *ngIf="items.length > 0">
+    <div class="col-md-6 col-lg-4 px-2 px-sm-3" *ngFor="let item of items">
+      <div class="destination-card">
+        <div class="img-wrap">
+          <img [src]="item.tripImage" [alt]="item.tripName" />
+        </div>
+        <div class="card-body-info">
+          <h6 class="mb-1" style="color: var(--text-heading)">{{ item.tripName }}</h6>
+          <p class="mb-2" style="color: var(--text-muted); font-size: .8rem">
+            <i class="bi bi-geo-alt"></i> {{ item.location }}
+          </p>
+          <div class="d-flex justify-content-between align-items-center mt-2">
+            <strong style="color: var(--brand-primary)">${{ item.price }}</strong>
+            <div class="d-flex gap-2">
+              <a [routerLink]="['/trips', item.tripId]" class="btn btn-wanderly-outline btn-sm">View</a>
+              <button class="btn btn-wanderly-outline btn-sm" (click)="remove(item.id)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

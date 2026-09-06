@@ -1,0 +1,283 @@
+<div class="wanderly-home" [attr.data-bs-theme]="darkMode ? 'dark' : 'light'">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg wanderly-navbar">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/home">
+        <i class="bi bi-airplane-fill"></i> Wanderly
+        <small>TRAVEL THE WORLD</small>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" routerLink="/home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/destinations">Destinations</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/trips">Trips</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/booking">Bookings</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/my-bookings">My Bookings</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-3">
+          <div class="help-box d-none d-xl-flex">
+            <i class="bi bi-telephone-fill help-icon"></i>
+            <div>
+              <div class="tiny">Need Help?</div>
+              <strong class="small" style="color: var(--text-heading);">+1234 567 8900</strong>
+            </div>
+          </div>
+          <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-label]="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+            <i class="bi" [class.bi-moon-fill]="!darkMode" [class.bi-sun-fill]="darkMode"></i>
+          </button>
+          <a class="profile-icon" routerLink="/my-wishlist" aria-label="Wishlist"><i class="bi bi-heart"></i></a>
+          <a class="profile-icon" routerLink="/login" aria-label="Profile"><i class="bi bi-person"></i></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-section-full" style="background-image: url('https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1800&q=85');">
+    <div class="hero-fade"></div>
+    <div class="container hero-content">
+      <div class="row">
+        <div class="col-lg-6 col-xl-5">
+          <span class="hero-eyebrow mb-3"><i class="bi bi-airplane"></i> EXPLORE. DREAM. DISCOVER.</span>
+          <h1 class="hero-title mb-3">Discover Amazing<br><span class="accent">Places with Us</span></h1>
+          <p class="hero-desc mb-4">Find the best tours, hotels and flights; everything you need for the perfect trip.</p>
+          <a routerLink="/destinations" class="btn btn-wanderly">Explore Now <i class="bi bi-arrow-right ms-2"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH -->
+  <div class="container">
+    <div class="search-widget">
+      <div class="search-tabs">
+        @for (tab of ['Flights', 'Trips', 'Packages']; track tab) {
+          <button type="button" class="search-tab" [class.active]="activeSearchTab === tab" (click)="setSearchTab(tab)">
+            <i class="bi" [class.bi-airplane]="tab === 'Flights'" [class.bi-building]="tab === 'Hotels'" [class.bi-binoculars]="tab === 'Tours'" [class.bi-gift]="tab === 'Packages'"></i>
+            {{ tab }}
+          </button>
+        }
+      </div>
+
+      <div class="row align-items-end g-0">
+        <div class="col-lg-2 search-field">
+          <label>From</label>
+          <input [(ngModel)]="from" type="text" placeholder="New York (NYC)">
+        </div>
+        <div class="col-lg-2 search-field">
+          <label>To</label>
+          <input [(ngModel)]="to" type="text" placeholder="Where to?">
+        </div>
+        <div class="col-lg-2 search-field">
+          <label>Depart</label>
+          <input [(ngModel)]="depart" type="text">
+        </div>
+        <div class="col-lg-2 search-field">
+          <label>Return</label>
+          <input [(ngModel)]="returnDate" type="text">
+        </div>
+        <div class="col-lg-2 search-field">
+          <label>Travelers</label>
+          <input [(ngModel)]="travelers" type="text">
+        </div>
+        <div class="col-lg-2 p-2">
+          <button class="btn btn-wanderly w-100" type="button" (click)="search()">Search <i class="bi bi-search ms-1"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="section-py pb-4">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-6 col-lg-3">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="bi bi-tags"></i></div>
+            <div><h6>Best Price Guarantee</h6><p>We ensure you get the best deals always.</p></div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="bi bi-headset"></i></div>
+            <div><h6>24/7 Customer Support</h6><p>We're here to help you anytime, anywhere.</p></div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
+            <div><h6>Secure Bookings</h6><p>Your data and payments are 100% safe with us.</p></div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="bi bi-award"></i></div>
+            <div><h6>Handpicked Experiences</h6><p>Curated tours and hotels for unforgettable trips.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR DESTINATIONS -->
+  <section class="section-py pt-4" id="destinations-preview">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title mb-0">Popular Destinations <span class="text-accent">✈</span></h2>
+        <a routerLink="/destinations" class="btn-wanderly-outline">View All Destinations <i class="bi bi-arrow-right ms-1"></i></a>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-6 col-lg-3">
+          <a class="destination-card" routerLink="/destinations">
+            <div class="img-wrap">
+              <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=700&q=80" alt="Thailand">
+              <span class="badge-tag badge-bestseller">Bestseller</span>
+              <div class="card-overlay"><div><strong>Thailand</strong><small class="d-block"><i class="bi bi-geo-alt"></i> Phuket</small></div><div class="price"><small>From</small><strong>$699</strong></div></div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-lg-3">
+          <a class="destination-card" routerLink="/destinations">
+            <div class="img-wrap">
+              <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=700&q=80" alt="France">
+              <span class="badge-tag badge-popular">Popular</span>
+              <div class="card-overlay"><div><strong>France</strong><small class="d-block"><i class="bi bi-geo-alt"></i> Paris</small></div><div class="price"><small>From</small><strong>$799</strong></div></div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-lg-3">
+          <a class="destination-card" routerLink="/destinations">
+            <div class="img-wrap">
+              <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=700&q=80" alt="Bali Indonesia">
+              <span class="badge-tag badge-trending">Trending</span>
+              <div class="card-overlay"><div><strong>Bali, Indonesia</strong><small class="d-block"><i class="bi bi-geo-alt"></i> Ubud</small></div><div class="price"><small>From</small><strong>$599</strong></div></div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-lg-3">
+          <a class="destination-card" routerLink="/destinations">
+            <div class="img-wrap">
+              <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=700&q=80" alt="Dubai UAE">
+              <span class="badge-tag badge-bestseller">Bestseller</span>
+              <div class="card-overlay"><div><strong>Dubai, UAE</strong><small class="d-block"><i class="bi bi-geo-alt"></i> Dubai</small></div><div class="price"><small>From</small><strong>$899</strong></div></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE -->
+  <section class="section-py pt-4" id="about">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-6">
+          <h2 class="section-title mb-4">Why Choose <span class="italic-font text-accent">Wanderly?</span></h2>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="why-item"><div class="why-icon"><i class="bi bi-globe2"></i></div><div><h6>Wide Range of Choices</h6><p>Choose from thousands of flights, hotels and tours worldwide.</p></div></div>
+              <div class="why-item"><div class="why-icon"><i class="bi bi-wallet2"></i></div><div><h6>Flexible & Easy Booking</h6><p>Book with ease and adjust your plans if needed.</p></div></div>
+            </div>
+            <div class="col-md-6">
+              <div class="why-item"><div class="why-icon"><i class="bi bi-hand-thumbs-up"></i></div><div><h6>Trusted by Travelers</h6><p>Join millions of happy travelers around the world.</p></div></div>
+              <div class="why-item"><div class="why-icon"><i class="bi bi-stars"></i></div><div><h6>Exclusive Deals</h6><p>Get access to exclusive discounts and special offers.</p></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="cta-banner" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=85');">
+            <div class="cta-content">
+              <div class="small fw-semibold text-uppercase mb-2">LET'S GO!</div>
+              <h3 class="fw-bold mb-2">Your Next Adventure Awaits!</h3>
+              <p class="mb-3 opacity-75">Discover breathtaking places and create unforgettable memories.</p>
+              <a routerLink="/trips" class="btn btn-light rounded-pill px-4 fw-semibold">Plan Your Trip <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="pb-2" id="blog">
+    <div class="container">
+      <div class="newsletter-bar">
+        <div class="row align-items-center g-3">
+          <div class="col-lg-5">
+            <div class="d-flex align-items-center gap-3">
+              <i class="bi bi-send-fill fs-3"></i>
+              <div><strong>Subscribe to Our Newsletter</strong><div class="small opacity-75">Get the latest travel deals and inspiration straight to your inbox.</div></div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="d-flex gap-2">
+              <input [(ngModel)]="email" type="email" placeholder="Enter your email" aria-label="Email">
+              <button class="btn-subscribe" type="button" (click)="subscribe()">Subscribe</button>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="d-flex justify-content-lg-end gap-2">
+              <a class="social-icon" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+              <a class="social-icon" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+              <a class="social-icon" href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+              <a class="social-icon" href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+      <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <a class="navbar-brand d-inline-block mb-2" routerLink="/home">
+            <i class="bi bi-airplane-fill"></i> Wanderly
+            <small>TRAVEL THE WORLD</small>
+          </a>
+          <p class="small mb-0" style="max-width:320px;">
+            Your trusted travel partner for flights, hotels, tours and unforgettable experiences around the world.
+          </p>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6>Explore</h6>
+          <div class="d-flex flex-column gap-2">
+            <a routerLink="/home">Home</a>
+            <a routerLink="/destinations">Destinations</a>
+            <a routerLink="/trips">Trips</a>
+            <a routerLink="/booking">Bookings</a>
+            <a routerLink="/my-bookings">My Bookings</a>
+            <a routerLink="/my-wishlist">My Wishlist</a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6>Company</h6>
+          <div class="d-flex flex-column gap-2">
+            <a href="#about">About Us</a>
+            <a routerLink="/login">Login</a>
+            <a routerLink="/register">Register</a>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h6>Need Help?</h6>
+          <p class="small mb-2">Our support team is available 24/7.</p>
+          <a href="tel:+12345678900"><i class="bi bi-telephone me-2"></i>+1234 567 8900</a><br>
+          <a href="mailto:hello@wanderly.com"><i class="bi bi-envelope me-2"></i>hello@wanderly.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2">
+        <span>© 2026 Wanderly. All rights reserved.</span>
+        <span>Made for travelers who love to explore ✈</span>
+      </div>
+    </div>
+  </footer>

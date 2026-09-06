@@ -1,0 +1,48 @@
+.wanderly-home {
+  min-height: 100vh;
+  background: var(--bg-main);
+  color: var(--text-body);
+}
+
+.wanderly-home .navbar-brand i {
+  vertical-align: -2px;
+}
+
+.wanderly-home .navbar-brand small {
+  color: var(--text-muted);
+}
+
+.wanderly-home .navbar-toggler:focus {
+  box-shadow: 0 0 0 3px rgba(26, 111, 224, .12);
+}
+
+.wanderly-home .destination-card strong {
+  font-size: .92rem;
+}
+
+@media (max-width: 575px) {
+  .wanderly-home .hero-eyebrow {
+    font-size: .62rem;
+  }
+
+  .wanderly-home .hero-desc {
+    font-size: .84rem;
+  }
+
+  .wanderly-home .search-tabs {
+    gap: 2px;
+  }
+
+  .wanderly-home .search-tab {
+    font-size: .75rem;
+    padding: 7px 9px;
+  }
+
+  .wanderly-home .newsletter-bar .d-flex {
+    flex-wrap: wrap;
+  }
+
+  .wanderly-home .newsletter-bar .btn-subscribe {
+    width: 100%;
+  }
+}

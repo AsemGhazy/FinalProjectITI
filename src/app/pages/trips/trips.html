@@ -1,0 +1,182 @@
+<div class="wanderly-trips" [attr.data-bs-theme]="darkMode ? 'dark' : 'light'">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg wanderly-navbar">
+        <div class="container">
+            <a class="navbar-brand" routerLink="/home">
+                <i class="bi bi-airplane-fill"></i> Wanderly
+                <small>TRAVEL THE WORLD</small>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-label="Toggle navigation">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" routerLink="/home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/destinations">Destinations</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/trips">Trips</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/booking">Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/my-bookings">My Bookings</a></li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3">
+                    <div class="help-box d-none d-xl-flex">
+                        <i class="bi bi-telephone-fill help-icon"></i>
+                        <div>
+                            <div class="tiny">Need Help?</div>
+                            <strong class="small" style="color: var(--text-heading);">+1234 567 8900</strong>
+                        </div>
+                    </div>
+                    <button class="theme-toggle" type="button" (click)="toggleTheme()"
+                        [attr.aria-label]="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+                        <i class="bi" [class.bi-moon-fill]="!darkMode" [class.bi-sun-fill]="darkMode"></i>
+                    </button>
+                    <a class="profile-icon" routerLink="/my-wishlist" aria-label="Wishlist"><i class="bi bi-heart"></i></a>
+                    <a class="profile-icon" routerLink="/login" aria-label="Profile"><i class="bi bi-person"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <div class="container">
+            <span class="hero-eyebrow mb-3"><i class="bi bi-binoculars"></i> HANDPICKED FOR YOU</span>
+            <h1 class="section-title mt-3 mb-2">Explore Our <span class="italic-font text-accent">Trips</span></h1>
+            <p class="mb-0" style="max-width:520px;">Browse curated tours and adventures, from island getaways to
+                mountain treks.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- FILTERS -->
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            @for (filter of filters; track filter) {
+            <button type="button" class="filter-pill" [class.active]="activeFilter === filter"
+                (click)="setFilter(filter)">
+                {{ filter }}
+            </button>
+            }
+        </div>
+
+        <!-- TRIPS GRID -->
+        @if (filteredTrips().length) {
+        <div class="row g-3 pb-5">
+            @for (trip of filteredTrips(); track trip.id) {
+            <div class="col-6 col-lg-3">
+                <div class="destination-card">
+                    <div class="img-wrap">
+                        <img [src]="trip.image" [alt]="trip.name">
+                        <span class="badge-tag" [class]="trip.badgeClass">{{ trip.badge }}</span>
+                        <div class="card-overlay">
+                            <div>
+                                <strong>{{ trip.name }}</strong>
+                                <small class="d-block"><i class="bi bi-geo-alt"></i> {{ trip.location }}</small>
+                            </div>
+                            <div class="price">
+                                <small>From</small>
+                                <strong>${{ trip.price }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body-info">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="rating-stars"><i class="bi bi-star-fill"></i> {{ trip.rating }}</span>
+                            <small class="text-muted"><i class="bi bi-clock"></i> {{ trip.duration }}</small>
+                        </div>
+                        <button class="btn-wanderly-outline w-100 mt-3" type="button" (click)="viewTrip(trip)">View
+                            Details</button>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        } @else {
+        <div class="empty-state pb-5">
+            <i class="bi bi-compass"></i>
+            <p class="mt-3 mb-0">No trips found in this category yet.</p>
+        </div>
+        }
+    </div>
+
+    <!-- NEWSLETTER -->
+    <section class="pb-2">
+        <div class="container">
+            <div class="newsletter-bar">
+                <div class="row align-items-center g-3">
+                    <div class="col-lg-5">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="bi bi-send-fill fs-3"></i>
+                            <div><strong>Subscribe to Our Newsletter</strong>
+                                <div class="small opacity-75">Get the latest travel deals and inspiration straight to
+                                    your inbox.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="d-flex gap-2">
+                            <input [(ngModel)]="email" type="email" placeholder="Enter your email" aria-label="Email">
+                            <button class="btn-subscribe" type="button" (click)="subscribe()">Subscribe</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="d-flex justify-content-lg-end gap-2">
+                            <a class="social-icon" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a class="social-icon" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a class="social-icon" href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                            <a class="social-icon" href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <a class="navbar-brand d-inline-block mb-2" routerLink="/home">
+                        <i class="bi bi-airplane-fill"></i> Wanderly
+                        <small>TRAVEL THE WORLD</small>
+                    </a>
+                    <p class="small mb-0" style="max-width:320px;">
+                        Your trusted travel partner for flights, hotels, tours and unforgettable experiences around the
+                        world.
+                    </p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6>Explore</h6>
+                    <div class="d-flex flex-column gap-2">
+                        <a routerLink="/home">Home</a>
+                        <a routerLink="/destinations">Destinations</a>
+                        <a routerLink="/trips">Trips</a>
+                        <a routerLink="/my-bookings">My Bookings</a>
+                        <a routerLink="/my-wishlist">My Wishlist</a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6>Company</h6>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="#about">About Us</a>
+                        <a routerLink="/login">Login</a>
+                        <a routerLink="/register">Register</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <h6>Need Help?</h6>
+                    <p class="small mb-2">Our support team is available 24/7.</p>
+                    <a href="tel:+12345678900"><i class="bi bi-telephone me-2"></i>+1234 567 8900</a><br>
+                    <a href="mailto:hello@wanderly.com"><i class="bi bi-envelope me-2"></i>hello@wanderly.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2">
+                <span>© 2026 Wanderly. All rights reserved.</span>
+                <span>Made for travelers who love to explore ✈</span>
+            </div>
+        </div>
+    </footer>
+</div>
